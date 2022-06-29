@@ -115,6 +115,21 @@ class Vector(object):
             else:
                 raise e
 
+    def cross(self, other: 'Vector') -> 'Vector':
+        try:
+            x1, y1, z1 = self.coordinates
+            x2, y2, z2 = other.coordinates
+
+            new_coor = [y1 * z2 - y2 * z1,
+                        -(x1 * z2 - x2 * z1),
+                        x1 * y2 - x2 * y1]
+
+            return Vector(new_coor)
+
+        except ValueError:
+          pass
+        # Todo: Add this code 
+
     def __len__(self) -> int:
         return len(self.coordinates)
 
