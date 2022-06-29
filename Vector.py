@@ -4,6 +4,8 @@ from math import sqrt, acos, pi
 
 CANNOT_NORMALIZE_ZERO_VECTOR = 'Cannot normalize the zero vector'
 CANNOT_COMPUTE_ANGLE_WITH_ZERO_VEC = 'Cannot compute angle with the zero vector'
+NO_UNIQUE_PARALLEL_COMPONENT_MSG = "There is not unique parallel component"
+NO_UNIQUE_ORTHOGONAL_COMPONENT_MSG = "There is not unique orthogonal component"
 
 class Vector(object):
 
@@ -94,13 +96,26 @@ class Vector(object):
         try:
             projection = self.component_parallel_to(other)
             return self - projection
+
         except Exception as e:
-            print(str(e))
+            if str(e) == NO_UNIQUE_PARALLEL_COMPONENT_MSG:
+                raise Exception(NO_UNIQUE_ORTHOGONAL_COMPONENT_MSG)
+            else:
+                raise e
 
     def component_parallel_to(self, other: 'Vector') -> 'Vector':
-        pass
+        try:
+            other_unit_vec = other.normalize()
+            weight = self.dot(other_unit_vec)
+            return weight * other_unit_vec
 
-    # Todo: continue those 2 functions
+        except Exception as e:
+            if str(e) == CANNOT_NORMALIZE_ZERO_VECTOR:
+                raise Exception(NO_UNIQUE_PARALLEL_COMPONENT_MSG)
+            else:
+                raise e
+
+
 
 
 
