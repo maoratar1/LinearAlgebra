@@ -1,2 +1,7 @@
 # created by virtualenv automatically
-* .idea/
+
+.idea/
+venv/py/bin/
+venv/py/lib/
+venv/py/pyvenv.cfg
+
