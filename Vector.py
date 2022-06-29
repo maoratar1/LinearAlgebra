@@ -115,10 +115,6 @@ class Vector(object):
             else:
                 raise e
 
-
-
-
-
     def __len__(self) -> int:
         return len(self.coordinates)
 
